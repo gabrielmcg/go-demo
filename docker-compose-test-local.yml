@@ -26,7 +26,7 @@ services:
       service: unit
     environment:
       - HOST_IP=staging-dep:8080
-    command: bash -c "go get -d -v -t && go test --tags integration -v"
+    command: bash -c "https_proxy=http://proxy.am2.hpelabs.net:8080 go get -d -v -t && go test --tags integration -v"
 
   production:
     extends:
@@ -34,7 +34,7 @@ services:
     environment:
       - HOST_IP=${HOST_IP}
     network_mode: host
-    command: bash -c "go get -d -v -t && go test --tags integration -v"
+    command: bash -c "https_proxy=http://proxy.am2.hpelabs.net:8080 go get -d -v -t && go test --tags integration -v"
 
   db:
     image: mongo:3.2.10
